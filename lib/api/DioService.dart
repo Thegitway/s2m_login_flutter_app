@@ -6,47 +6,107 @@ class DioService{
 
   Dio dio=Dio(BaseOptions(
     //TODO update baseurl
-    baseUrl: 'www.google.com',
-    connectTimeout: 5000,
-    receiveTimeout: 3000,
+    baseUrl: 'https://194.204.196.220:9845/mobile-web-api',
+    connectTimeout: 15000,
+    receiveTimeout: 15000,
   ));
 
-
-  Future getAccessToken(String email,String password) async{
+  Future getAccessToken(String username,String password) async{
     try {
-      final response = await dio.post<dynamic>('mptf/generic/1/0/authentication/login',
+      //TODO hachage du mot de passe
+
+      final response = await dio.post<dynamic>('/mptf/generic/1/0/authentication/login',
           data: {
-            'headerRequest': {
-              'appPlateform': Platform.isIOS ? 'IOS' : 'ANDROID',
-              'appVersion': 'appVersion',
-              'appType': 'AGENT',
-              'requesTime': DateTime.now().toIso8601String(),
-              'preferredLanguage': 3,
-              'institutionId': 'institutionId',
-              'deviceInfo': {
-                'osType': Platform.isIOS ? 'IOS' : 'ANDROID',
-                'osVersion': Platform.version,
-                'deviceType': Platform.isAndroid || Platform.isAndroid
-                    ? 'PHONE'
-                    : 'OTHER',
-                'imei': 'string',
-                'deviceLat': 'string',
-                'deviceLon': 'string',
-                'deviceId': 'string'
-              }
-            },
-            'password': password,
-            'login': email,
-            'serialNumber': 'string'
+              'headerRequest':{
+                'institutionId':'111222',
+                'appVersion':'1.1',
+                'preferredLanguage':2,
+                'requesTime':1643133540288,
+                'appType':'A',
+                'appPlateform':'ANDROID'
+              },
+              'login':'+22222144747',
+              'password':'truKY5SleqSNAVdACUP3ejF/83OAvDWvvOESSImUpegb/woA6SIL+yjV+WWYfBRb+jq2Z+SEF7TLIbDTzwzgWg==',
+              'serialNumber':'25b70561-c5dc-4baa-8b0c-57e7678ce751'
+            
           });
       if (response.statusCode == 200) {
+        print("yahya ${response.data["accessToken"]}");
+        print("response body ${response.data}");
+
         return response;
       } else
         return null;
     }
     catch (e) {
       //TODO handle error
-      throw e;
+      print('err'+e.toString());
+          throw e;0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
   }

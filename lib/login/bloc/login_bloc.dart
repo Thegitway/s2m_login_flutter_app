@@ -50,14 +50,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         await _dioService.getAccessToken(
           state.username.value,
-          state.password.value,
+            "truKY5SleqSNAVdACUP3ejF/83OAvDWvvOESSImUpegb/woA6SIL+yjV+WWYfBRb+jq2Z+SEF7TLIbDTzwzgWg==",
         );
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
       } catch (e) {
         var message=e.toString();
         if(e is DioError)
          message=(e).message;
-
+        print("error :m"+ message);
         emit(state.copyWith(status: FormzStatus.submissionFailure,error: message));
       }
     }
