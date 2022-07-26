@@ -41,7 +41,7 @@ class DioService{
     catch (e) {
       //TODO handle error
       print('err'+e.toString());
-          throw e;0
+          throw e;
 
 
 
